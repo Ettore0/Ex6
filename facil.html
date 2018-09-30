@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang = "pt-BR">
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+	<title>Nível: Fácil</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style/styleFacil.css">
+	<script type="text/javascript" src="script/javascript.js"></script>
+	<script type="text/javascript" src="json/data.json" charset="utf-8"></script>
+</head>
+<body onload="loadJson()">
+	<script>
+		function loadJson(){
+			//var dados = JSON.parse(dadosFacil);
+			sorteio(JSON.parse(dadosFacil));
+		}
+	</script>
+
+	<div>
+		<button class="voltar" onclick="openHomepage()">Voltar</button>
+		<h1 class="titulo">Fácil</h1>
+	</div>
+
+	<div class="vidas">
+		<h1 id="vidas"></h1>
+	</div>
+	<div class="pontuacao">
+		<h1 id="pontuacao"> </h1>
+	</div>
+
+	<div class="imagemLogo">
+		<img id="imagemLogoID">
+	</div>
+	<form name="form1" class="textoLogo" name="form1" autocomplete="off">
+		<h1 class="resposta">Resposta:</h1><input id="resposta" class="respostaLogo" type="text" name="textoLogo">
+		<div class="posbot">
+			<input type="button" class="enviar" value="Enviar" onclick="validaResposta()"/>
+			<input type="button" class="dica" value="Dica" onclick="exibeDica()"/>
+		</div>
+	</form>
+	<div class="erropos" id="erro">Resposta errada</div>
+	<div class="dicapos" id="dica1"></div>
+</body>
+</html>

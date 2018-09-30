@@ -1,0 +1,54 @@
+body{
+    margin: 0 auto;
+    font-family: avenir, Helvetica, sans-serif;
+    background-color: #191414;
+}
+table{
+	text-align: center;
+	color: white;
+}
+div{
+	text-align: center;
+}
+
+button{
+    text-align: center;
+    font-size: 0.9em;
+
+    border-radius: 25px;
+    border: none;
+
+    margin-top: 6px;
+    
+    background-color: #1db954; /*Verde*/
+    
+    font-weight: bold;
+    text-decoration: unset;
+    padding: 0.8%;
+    color: white;
+   
+    width: 20%;
+}
+
+button:hover{
+    color: white;
+    background-color: darkgreen;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.voltar{
+	position: relative;
+	width: 10%;
+	left: 0.5%;
+}
+
+.main{
+	position: relative;
+	left: 35%;
+	border-style: solid;
+	border-color: white;
+	border-width: 2px;
+	height: 650px;
+	width: 30%;
+}

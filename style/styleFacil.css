@@ -1,0 +1,159 @@
+body{
+    margin: auto auto;
+    font-family: avenir, Helvetica, sans-serif;
+    background-color: #191414;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+input{
+	font-size: 3.5em;
+}
+
+button{
+    text-align: center;
+    font-size: 0.9em;
+    border-radius: 25px;
+    border: none;
+    margin-top: 6px; 
+    background-color: #1db954; /*Verde*/
+    font-weight: bold;
+    text-decoration: unset;
+    padding: 0.8%;
+    color: white;
+    width: 20%;
+}
+
+button:hover{
+    color: white;
+    background-color: darkgreen;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+h1{
+    color: white;
+    max-width: 15%;
+}
+
+.voltar{
+    position: relative;
+    width: 10%;
+    left: 1%;
+    float: left;
+}
+
+.titulo{
+    position: relative;
+    text-align: center;
+    border-radius: 25px;
+    background: #1db954; /*Verde*/
+    padding: 1%;
+    padding-bottom: 2.5%;
+    width: 10%;
+    height: 2%;
+    left: 44%;
+    color: white;
+}
+
+.imagemLogo{
+	position: relative;
+    display: inline-block;
+    left: 15%;
+    margin-top: 8%;
+    background-color: white;
+    max-width: 30%;
+    min-width: 30%;
+}
+
+#imagemLogoID{
+    position: absolute;
+    max-width: 80%;
+    min-width: 80%;
+}
+
+.resposta{
+    position:relative;
+    left: 50%;
+    margin-top: 5%;
+    color: white;
+    max-width: 15%;
+    min-width: 10%;
+}
+
+.respostaLogo{
+	position: relative;
+    left: 50%;
+    max-width: 35%;
+}
+
+.posbot{
+    position: relative;
+    margin-top:1%;
+    left: 65%;
+    max-width: 25%;
+}
+
+.dica{
+    margin-left: 0.5%;
+}
+
+.dicapos{
+    margin-top: 20%;
+    margin-left: 50%;
+    max-width: 40%;
+    min-width: 40%;
+    color: white;
+    font-size: 2em;
+}
+
+.erropos{
+    margin-top: -18%;
+    margin-left: 50%;
+    max-width: 40%;
+    min-width: 40%;
+    color: white;
+    font-size: 2em; 
+    visibility: hidden;  
+}
+
+#pontuacao{
+    position: relative;
+    float: right;
+    margin-right: 90%;
+    margin-top: -6%;
+    white-space: nowrap;
+    display: inline;
+}
+
+#vidas{
+    position: relative;
+    float: right;
+    margin-right: 91%;
+    margin-top: 2%;
+    white-space: nowrap;
+    display: inline;
+}
+
+.dica, .enviar{
+    text-align: center;
+    font-size: 1em;
+    border-radius: 25px;
+    border: none;
+    margin-top: 6px; 
+    background-color: #1db954; /*Verde*/
+    font-weight: bold;
+    text-decoration: unset;
+    padding: 3%;
+    color: white;
+    max-width: 40%;
+    min-width: 40%;
+}
+
+
+.dica:hover, .enviar:hover{
+    color: white;
+    background-color: darkgreen;
+    font-weight: bold;
+    text-transform: uppercase;
+}

@@ -1,0 +1,57 @@
+body{
+    margin: auto auto;
+    font-family: avenir, Helvetica, sans-serif;
+    background-color: #191414;
+    max-width: 100%;
+    min-width: 100%;
+	text-align: center;
+}
+
+button{
+    text-align: center;
+    font-size: 0.9em;
+    border-radius: 25px;
+    border: none;
+    margin-top: 6px; 
+    background-color: #1db954; /*Verde*/
+    font-weight: bold;
+    text-decoration: unset;
+    padding: 0.8%;
+    color: white;
+    width: 20%;
+}
+
+button:hover{
+    color: white;
+    background-color: darkgreen;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.voltar{
+	position: relative;
+	width: 10%;
+	left: 1%;
+	float: left;
+}
+
+.titulo{
+    position: relative;
+    text-align: center;
+    border-radius: 25px;
+    background: #1db954; /*Verde*/
+    padding: 1%; 
+    padding-bottom: 2.5%;
+    width: 10%;
+    height: 2%;
+    left: 44%;
+    color: white;
+}
+
+h1, h2, h3{
+    color: white;
+}
+
+.nivelFacil, .nivelMedio, .nivelDificil{
+		text-align: center;
+}

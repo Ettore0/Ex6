@@ -1,0 +1,5 @@
+body{
+    margin: 0 auto;
+    font-family: avenir, Helvetica, sans-serif;
+    background-color: #191414;
+}
