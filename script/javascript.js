@@ -32,10 +32,11 @@ function openRegras(){
 function sorteio(dados){
 
 	//verificação se o usuário veio de outro nivel
-	
+
 	vidas_aux = localStorage.getItem("quantidade_vidas"); //salvo a quantidade de vidas
 	pontuacao_aux = localStorage.getItem("pontos"); //salvo a pontuação atual
-	if(pontuacao_aux != 0){	//dif de zero
+	if(pontuacao_aux != 0 && pontuacao_aux != null && pontuacao_aux != 'undefined'){	//dif de zero
+
 		alert(pontuacao_aux);
 		localStorage.setItem("quantidade_vidas", 0);	//zero as variaveis do navegador para evitar 
 		localStorage.setItem("pontos", 0);
