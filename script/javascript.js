@@ -7,6 +7,8 @@ var indice = 0;
 var estadoDica = 0;	//0 = não exibida
 var estadoEnvio = 0;//0 = resposta não enviada
 var indiceGeral = 0;//para percorrer o vetor_sorteado
+var pontuacao_aux = 0;
+var vidas_aux = 0;
 
 function openFacil() {
 	window.open('facil.html', '_self', false);
@@ -28,7 +30,19 @@ function openRegras(){
 }
 
 function sorteio(dados){
+
+	//verificação se o usuário veio de outro nivel
 	
+	vidas_aux = localStorage.getItem("quantidade_vidas"); //salvo a quantidade de vidas
+	pontuacao_aux = localStorage.getItem("pontos"); //salvo a pontuação atual
+	if(pontuacao_aux != 0){	//dif de zero
+		alert(pontuacao_aux);
+		localStorage.setItem("quantidade_vidas", 0);	//zero as variaveis do navegador para evitar 
+		localStorage.setItem("pontos", 0);
+		pontuacao = pontuacao_aux;
+		vidas = vidas_aux;
+	}//else -> vidas = 3 e pontuacao = 0 (não alterado apos a inicializacao)
+
 	vetor_sorteado = new Array(dados.length);
 	data = dados;	//possivelmente não sera necessário
     var verifica;
@@ -64,6 +78,7 @@ function sorteio(dados){
 
 function inicia_jogo(i){
 
+
 	if(indiceGeral < data.length){
 		atualizaVidas(vidas);
 		atualizaPontuacao(pontuacao);
@@ -72,10 +87,14 @@ function inicia_jogo(i){
 	
 		//percorrer o vetor chamando a loadImage
 		indice = vetor_sorteado[i];	//para exibir a dica correspondente a imagem exibida
-		//alert(data[indice].nome);// tirar essa porra
 		loadImage(indice);
-	}else{
-		//chama procimo niveu
+
+	}else{	//acabou o nivel
+		//salva as variaveis do navegador para o proximo nivel
+		localStorage.setItem("quantidade_vidas", vidas);
+		localStorage.setItem("pontos", pontuacao);
+
+		//chama proximo nivel
 		if(parseInt(data[0].valorAcerto) === 10){
 			window.open('medio.html', '_self', false);
 		} else if (parseInt(data[0].valorAcerto) === 15){

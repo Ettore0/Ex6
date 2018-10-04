@@ -7,7 +7,7 @@ body{
 }
 
 input{
-    font-size: 3.5em;
+	font-size: 3.5em;
 }
 
 button{
@@ -57,7 +57,7 @@ h1{
 }
 
 .imagemLogo{
-    position: relative;
+	position: relative;
     display: inline-block;
     left: 15%;
     margin-top: 8%;
@@ -82,7 +82,7 @@ h1{
 }
 
 .respostaLogo{
-    position: relative;
+	position: relative;
     left: 50%;
     max-width: 35%;
 }
@@ -99,7 +99,7 @@ h1{
 }
 
 .dicapos{
-    margin-top: 5%;
+    margin-top: 20%;
     margin-left: 50%;
     max-width: 40%;
     min-width: 40%;
@@ -120,8 +120,8 @@ h1{
 #pontuacao{
     position: relative;
     float: right;
-    margin-right: 90%;
-    margin-top: -6%;
+    margin-right: 88%;
+    margin-top: -1.5%;
     white-space: nowrap;
     display: inline;
 }
@@ -130,7 +130,7 @@ h1{
     position: relative;
     float: right;
     margin-right: 91%;
-    margin-top: 2%;
+    margin-top: 0%;
     white-space: nowrap;
     display: inline;
 }
