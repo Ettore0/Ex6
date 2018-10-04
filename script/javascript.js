@@ -31,6 +31,17 @@ function openRegras(){
 
 function sorteio(dados){
 
+	//verificação se o usuário veio de outro nivel
+	vidas_aux = localStorage.getItem("quantidade_vidas"); //salvo a quantidade de vidas
+	pontuacao_aux = localStorage.getItem("pontos"); //salvo a pontuação atual
+	if(pontuacao_aux != 0){	//dif de zero
+		alert(pontuacao_aux);
+		localStorage.setItem("quantidade_vidas", 0);	//zero as variaveis do navegador para evitar 
+		localStorage.setItem("pontos", 0);
+		pontuacao = pontuacao_aux;
+		vidas = vidas_aux;
+	}//else -> vidas = 3 e pontuacao = 0 (não alterado apos a inicializacao)
+
 	vetor_sorteado = new Array(dados.length);
 	data = dados;	//possivelmente não sera necessário
     var verifica;
@@ -65,17 +76,6 @@ function sorteio(dados){
 }
 
 function inicia_jogo(i){
-
-	
-	//verificação se o usuário veio de outro nivel
-	localStorage.getItem("quantidade_vidas", vidas_aux); //salvo a quantidade de vidas
-	localStorage.getItem("pontos", pontuacao_aux); //salvo a pontuação atual
-	if(!pontuacao_aux){	//dif de zero
-		localStorage.setItem("quantidade_vidas", 0);	//zero as variaveis do navegador para evitar 
-		localStorage.setItem("pontos", 0);
-		pontuacao = pontuacao_aux;
-		vidas = vidas_aux;
-	}//else -> vidas = 3 e pontuacao = 0 (não alterado apos a inicializacao)
 
 
 	if(indiceGeral < data.length){
