@@ -39,9 +39,9 @@ function sorteio(logosInfoArray){
 	data = logosInfoArray;	//possivelmente não sera necessário
     var verifica;
     var num_sorteado;
-    
+
 	for (var i = 0; i < logosInfoArray.length; i++) {	//for para preencher o logoInformation
-		
+
 		numero_sorteado = Math.floor((Math.random() * logosInfoArray.length));
 		//alert(numero_sorteado);
 		verifica = 0;
@@ -57,7 +57,7 @@ function sorteio(logosInfoArray){
 					menor_indice = j;	//pega a menor posição vazia
 				}
 			}
-			//alert('menor index ='+menor_indice);	
+			//alert('menor index ='+menor_indice);
 			logoInformation[menor_indice] = numero_sorteado;
 		}
 		else{
@@ -76,7 +76,7 @@ function levelThatUserIsIn() {
 
 	if(scoreAux != 0 && scoreAux != null && scoreAux != 'undefined'){	//dif de zero
 
-		localStorage.setItem("quantidade_vidas", 0);	//zero as variaveis do navegador para evitar 
+		localStorage.setItem("quantidade_vidas", 0);	//zero as variaveis do navegador para evitar
 		localStorage.setItem("pontos", 0);
 		score = scoreAux;
 		lives = livesAux;
@@ -86,7 +86,7 @@ function levelThatUserIsIn() {
 function startGame(i){
 
 	if(generalIndex < data.length){
-	
+
 		showLives(lives);
 		showScore(score);
 		updateHintStatus(false);
@@ -94,50 +94,49 @@ function startGame(i){
 		loadImage(index);
 
 	}else{	//acabou o nivel
-	
+
 		saveLivesAndScore();
 		nextLevel();
 	}
 }
 
 function saveLivesAndScore() {
-	
 	localStorage.setItem("quantidade_vidas", lives);
 	localStorage.setItem("pontos", score);
 }
 
 function nextLevel() {
-	
+
 	if(parseInt(data[0].rightAnswerScoreValue) === 10){
-	
+
 		openMediumLevelPage();
 
 	} else if (parseInt(data[0].rightAnswerScoreValue) === 15){
 
 		openHardLevelPage();
-	
+
 	} else {
 
 		alert('Parabens!!!');
 		endGame();
-	
+
 	}
 }
 
 function assertRightAnswer(){
-	
+
 	if(document.form1.textoLogo.value.toLowerCase() ===  data[index].logoName){
-	
-		rightAnswer();	
-	
+
+		rightAnswer();
+
 	}
-	
+
 	else if(document.form1.textoLogo.value === ""){
-	
+
 		alert('Digite uma resposta válida');
 
 	} else {
-	
+
 		wrongAnswer();
 	}
 }
@@ -153,21 +152,21 @@ function rightAnswer() {
 }
 
 function wrongAnswer() {
-	
+
 	verifyLivesAmount();
-	showWrongAnswer();	
+	showWrongAnswer();
 	clearTextBox();
 
 }
 
 function clearHintBox() {
-	
+
 	document.getElementById("dica1").innerHTML = null;
 
 }
 
 function clearTextBox() {
-	
+
 	document.form1.textoLogo.value = null;
 
 }
