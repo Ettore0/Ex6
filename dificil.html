@@ -15,7 +15,7 @@
 		function loadJson(){
 			//var dados;
 			//dados = JSON.parse(dadosDificil);
-			sorteio(JSON.parse(dadosDificil));
+			sorteio(JSON.parse(hardLevelArray));
 		}
 	</script>
 
@@ -25,11 +25,11 @@
 	</div>
 
 	<div class="vidas">
-		<h1 id="vidas"></h1>
+		<h1 id="lives"></h1>
 	</div>
 
 	<div class="pontuacao">
-		<h1 id="pontuacao"> </h1>
+		<h1 id="score"> </h1>
 	</div>
 
 	<div class="imagemLogo">
@@ -38,8 +38,8 @@
 	<form name="form1" class="textoLogo" name="form1" autocomplete="off">
 		<h1 class="resposta">Resposta:</h1><input id="resposta" class="respostaLogo" type="text" name="textoLogo">
 		<div class="posbot">
-			<input type="button" class="enviar" value="Enviar" onclick="validaResposta()" />
-			<input type="button" class="dica" value="Dica" onclick="exibeDica()"/>
+			<input type="button" class="enviar" value="Enviar" onclick="assertRightAnswer()" />
+			<input type="button" class="dica" value="Dica" onclick="verifyHintDisplay()"/>
 		</div>
 	</form>
 

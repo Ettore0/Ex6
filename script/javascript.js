@@ -1,22 +1,22 @@
 //variáveis globais
-var vetor_sorteado;	//cria o vetor para controlar que a mesma imagem não seja sorteada mais de uma vez;
+var logoInformation;	//cria o vetor para controlar que a mesma imagem não seja sorteada mais de uma vez;
 var data;
-var pontuacao = 0;
-var vidas = 3;
-var indice = 0;
-var estadoDica = 0;	//0 = não exibida
-var estadoEnvio = 0;//0 = resposta não enviada
-var indiceGeral = 0;//para percorrer o vetor_sorteado
-var pontuacao_aux = 0;
-var vidas_aux = 0;
+var score = 0;
+var lives = 3;
+var index = 0;
+var isHintAlreadyShowed = 0;	//0 = não exibida
+var isSubmitted = 0;//0 = resposta não enviada
+var generalIndex = 0;//para percorrer o logoInformation
+var scoreAux = 0;
+var livesAux = 0;
 
-function openFacil() {
+function openEasyLevelPage() {
 	window.open('facil.html', '_self', false);
 }
-function openMedio(){
+function openMediumLevelPage(){
 	window.open('medio.html', '_self', false);
 }
-function openDificil(){
+function openHardLevelPage(){
 	window.open('dificil.html', '_self', false);
 }
 function openScoreboard(){
@@ -25,48 +25,40 @@ function openScoreboard(){
 function openHomepage(){
 	window.open('index.html', '_self', false);
 }
-function openRegras(){
+function openRulesPage(){
 	window.open('regras.html', '_self', false);
 }
 
-function sorteio(dados){
+function sorteio(logosInfoArray){
 
 	//verificação se o usuário veio de outro nivel
+	levelThatUserIsIn();
+	//else -> lives = 3 e score = 0 (não alterado apos a inicializacao)
 
-	vidas_aux = localStorage.getItem("quantidade_vidas"); //salvo a quantidade de vidas
-	pontuacao_aux = localStorage.getItem("pontos"); //salvo a pontuação atual
-	if(pontuacao_aux != 0 && pontuacao_aux != null && pontuacao_aux != 'undefined'){	//dif de zero
-
-		//alert(pontuacao_aux);
-		localStorage.setItem("quantidade_vidas", 0);	//zero as variaveis do navegador para evitar 
-		localStorage.setItem("pontos", 0);
-		pontuacao = pontuacao_aux;
-		vidas = vidas_aux;
-	}//else -> vidas = 3 e pontuacao = 0 (não alterado apos a inicializacao)
-
-	vetor_sorteado = new Array(dados.length);
-	data = dados;	//possivelmente não sera necessário
+	logoInformation = new Array(logosInfoArray.length);
+	data = logosInfoArray;	//possivelmente não sera necessário
     var verifica;
     var num_sorteado;
-	for (var i = 0; i < dados.length; i++) {	//for para preencher o vetor_sorteado
+    
+	for (var i = 0; i < logosInfoArray.length; i++) {	//for para preencher o logoInformation
 		
-		numero_sorteado = Math.floor((Math.random() * dados.length));
+		numero_sorteado = Math.floor((Math.random() * logosInfoArray.length));
 		//alert(numero_sorteado);
 		verifica = 0;
-		for(var j = 0; j < dados.length; j++){
-			if(vetor_sorteado[j] === numero_sorteado){
+		for(var j = 0; j < logosInfoArray.length; j++){
+			if(logoInformation[j] === numero_sorteado){
 				verifica++;
 			}
 		}
 		if(verifica === 0){	//o numero sorteado nao foi sorteado antes
 			var menor_indice;
-			for (j = dados.length; j >= 0; j--) {
-				if(!vetor_sorteado[j] && vetor_sorteado[j] != 0){
+			for (j = logosInfoArray.length; j >= 0; j--) {
+				if(!logoInformation[j] && logoInformation[j] != 0){
 					menor_indice = j;	//pega a menor posição vazia
 				}
 			}
-			//alert('menor indice ='+menor_indice);	
-			vetor_sorteado[menor_indice] = numero_sorteado;
+			//alert('menor index ='+menor_indice);	
+			logoInformation[menor_indice] = numero_sorteado;
 		}
 		else{
 			//alert('entrou no else');
@@ -74,72 +66,164 @@ function sorteio(dados){
 		}
 	}
 	//apos sortear todo o vetor
-	inicia_jogo(0);
+	startGame(0);
 }
 
-function inicia_jogo(i){
+function levelThatUserIsIn() {
 
+	livesAux = localStorage.getItem("quantidade_vidas"); //salvo a quantidade de vidas
+	scoreAux = localStorage.getItem("pontos"); //salvo a pontuação atual
 
-	if(indiceGeral < data.length){
-		atualizaVidas(vidas);
-		atualizaPontuacao(pontuacao);
+	if(scoreAux != 0 && scoreAux != null && scoreAux != 'undefined'){	//dif de zero
 
-		estadoDica = 0;
+		localStorage.setItem("quantidade_vidas", 0);	//zero as variaveis do navegador para evitar 
+		localStorage.setItem("pontos", 0);
+		score = scoreAux;
+		lives = livesAux;
+	}
+}
+
+function startGame(i){
+
+	if(generalIndex < data.length){
 	
-		//percorrer o vetor chamando a loadImage
-		indice = vetor_sorteado[i];	//para exibir a dica correspondente a imagem exibida
-		loadImage(indice);
+		showLives(lives);
+		showScore(score);
+		updateHintStatus(false);
+		index = logoInformation[i];	//para exibir a hint correspondente a imagem exibida
+		loadImage(index);
 
 	}else{	//acabou o nivel
-		//salva as variaveis do navegador para o proximo nivel
-		localStorage.setItem("quantidade_vidas", vidas);
-		localStorage.setItem("pontos", pontuacao);
-
-		//chama proximo nivel
-		if(parseInt(data[0].valorAcerto) === 10){
-			window.open('medio.html', '_self', false);
-		} else if (parseInt(data[0].valorAcerto) === 15){
-			window.open('dificil.html', '_self', false);
-		} else {
-			alert('Parabens!!!');
-			finalizaJogo();
-		}
+	
+		saveLivesAndScore();
+		nextLevel();
 	}
 }
 
-function validaResposta(){
-	if(document.form1.textoLogo.value.toLowerCase() ===  data[indice].nome){
-		//resposta certa -> aumenta pontuação
-		pontuacao = parseInt(pontuacao) + parseInt(data[0].valorAcerto);
-		//alert(pontuacao);
-		atualizaPontuacao();
-		estadoEnvio = 1;
-		document.form1.textoLogo.value = null;
-		document.getElementById("dica1").innerHTML = null;	//apaga a dica exibida
-		//vai para a próxima imagem
-		indiceGeral = parseInt(indiceGeral) + 1;
-		//alert('indice:' +indiceGeral);
-		inicia_jogo(indiceGeral);	
+function saveLivesAndScore() {
+	
+	localStorage.setItem("quantidade_vidas", lives);
+	localStorage.setItem("pontos", score);
+}
+
+function nextLevel() {
+	
+	if(parseInt(data[0].rightAnswerScoreValue) === 10){
+	
+		openMediumLevelPage();
+
+	} else if (parseInt(data[0].rightAnswerScoreValue) === 15){
+
+		openHardLevelPage();
+	
+	} else {
+
+		alert('Parabens!!!');
+		endGame();
+	
 	}
+}
+
+function assertRightAnswer(){
+	
+	if(document.form1.textoLogo.value.toLowerCase() ===  data[index].logoName){
+	
+		rightAnswer();	
+	
+	}
+	
 	else if(document.form1.textoLogo.value === ""){
-		//caso o campo esteja vazio
+	
 		alert('Digite uma resposta válida');
-	}
-	else{
-		//resposta errada -> perde vida 
-		vidas = parseInt(vidas) - 1;
-		document.getElementById("erro").style.visibility = "visible";
-		setTimeout(function(){document.getElementById("erro").style.visibility = "hidden"},2000);
-		if (vidas === 0) {
-			finalizaJogo();
-		}
-		atualizaVidas(parseInt(vidas));
-		document.form1.textoLogo.value = null;
+
+	} else {
+	
+		wrongAnswer();
 	}
 }
 
-function finalizaJogo(){
-	alert('GAMEOVER. Sua pontuacao foi: ' +pontuacao);
+function rightAnswer() {
+
+	updateScore(parseInt(data[0].rightAnswerScoreValue));
+	clearTextBox();
+	clearHintBox();
+	nextLogo();
+	startGame(generalIndex);
+
+}
+
+function wrongAnswer() {
+	
+	verifyLivesAmount();
+	showWrongAnswer();	
+	clearTextBox();
+
+}
+
+function clearHintBox() {
+	
+	document.getElementById("dica1").innerHTML = null;
+
+}
+
+function clearTextBox() {
+	
+	document.form1.textoLogo.value = null;
+
+}
+
+function nextLogo() {
+	generalIndex = parseInt(generalIndex) + 1;
+}
+
+function verifyHintDisplay() {
+	isHintAlreadyShowed? alert("A dica já foi exibida") : showHint();
+}
+
+function showHint() {
+	document.getElementById("dica1").innerHTML = data[index].hint;
+	updateHintStatus(true);
+	updateScore(parseInt(data[0].hintScoreValue));
+}
+
+function updateHintStatus(status) {
+	isHintAlreadyShowed = status;
+}
+
+function updateScore(scoreValue) {
+	score = parseInt(score) + scoreValue;
+	showScore();
+}
+
+function showScore(){
+	document.getElementById('score').innerHTML = "Pontos:  " +score;
+}
+
+function loadImage(i){
+	document.getElementById('imagemLogoID').src = data[i].path;
+}
+
+function showWrongAnswer(){
+	document.getElementById("erro").style.visibility = "visible";
+	setTimeout(function(){document.getElementById("erro").style.visibility = "hidden"},2000);
+}
+
+function verifyLivesAmount() {
+	if (lives === 0) endGame();
+	losesLife();
+}
+
+function losesLife() {
+	lives -= 1;
+	showLives(lives);
+}
+
+function showLives(livesAmount){
+	document.getElementById('lives').innerHTML = "Vidas:  " +parseInt(livesAmount);
+}
+
+function endGame(){
+	alert('GAMEOVER. Sua pontuacao foi: ' +score);
 	nomeUsuario();
 	openHomepage();
 }
@@ -147,38 +231,4 @@ function finalizaJogo(){
 function nomeUsuario() {
 	var person = prompt("Please enter your name:", "");
 	escreveScoreboard(person);
-}
-
-function escreveScoreboard(person){
-	//data.nomes.push
-	//var obj = {};
-	//obj.name = person;
-	//obj.score = pontuacao;
-	//var jsonString = JSON.stringify(obj);
-}
-
-function exibeDica(){	//ok
-	if(estadoDica === 0){
-		document.getElementById("dica1").innerHTML = data[indice].dica;
-		pontuacao = parseInt(pontuacao) + parseInt(data[0].custoDica);
-		atualizaPontuacao();
-		estadoDica = 1;
-	}
-	else{
-		alert("A dica já foi exibida");
-	}
-}
-
-function loadImage(i){	//ok
-	document.getElementById('imagemLogoID').src = data[i].path;
-}
-
-function atualizaVidas(valor){
-	valor = parseInt(valor);
-	document.getElementById('vidas').innerHTML = "Vidas:  " +valor;
-}
-
-function atualizaPontuacao(){	//ok
-	//document.getElementById('pontuacao').innerHTML = null;
-	document.getElementById('pontuacao').innerHTML = "Pontos:  " +parseInt(pontuacao);
 }
